@@ -2,22 +2,10 @@ import { useRef, useState ,useEffect} from "react";
 import { Editor } from "@monaco-editor/react";
 import LanguageSelector from "./LanguageSelector";
 import ThemeSelector from "./ThemeSelector";
-const CODE_SNIPPETS = {
-    javascript: `\nfunction greet(name) {\n\tconsole.log("Hello, " + name + "!");\n}\n\ngreet("Alex");\n`,
-    typescript: `\ntype Params = {\n\tname: string;\n}\n\nfunction greet(data: Params) {\n\tconsole.log("Hello, " + data.name + "!");\n}\n\ngreet({ name: "Alex" });\n`,
-    python: `\ndef greet(name):\n\tprint("Hello, " + name + "!")\n\ngreet("Alex")\n`,
-    java: `\npublic class HelloWorld {\n\tpublic static void main(String[] args) {\n\t\tSystem.out.println("Hello World");\n\t}\n}\n`,
-    csharp:
-      'using System;\n\nnamespace HelloWorld\n{\n\tclass Hello { \n\t\tstatic void Main(string[] args) {\n\t\t\tConsole.WriteLine("Hello World in C#");\n\t\t}\n\t}\n}\n',
-    php: "<?php\n\n$name = 'Alex';\necho $name;\n",
-    c:`\n#include <stdio.h>\nint main() {\n\t// printf() displays the string inside quotation\n\tprintf("Hello, World!");\n\treturn 0;\n}\n`, 
-    cpp: `\n#include <iostream>\nint main() {\n\t// Prints Hello, World! to the console\n\tstd::cout << "Hello, World!" << std::endl;\n\treturn 0;\n}\n`, 
-  };
-const CodeEditor = () => {
+import { CODE_SNIPPETS } from "../Constants/CodeSnippet";
+const CodeEditor = ({language,code,handleCodeChange,handleLanguageChange}) => {
   const editorRef = useRef();
-  const [value, setValue] = useState("");
   const [theme, setTheme] = useState("vs-dark");
-  const [language, setLanguage] = useState("javascript");
   useEffect(() => {
     editorRef.current?.focus();
   },[language,theme]);
@@ -27,18 +15,15 @@ const CodeEditor = () => {
     editorRef.current?.focus();
   };
 
-  const onSelect = (language) => {
-    setLanguage(language);
-    setValue(CODE_SNIPPETS[language]);
-  };
+  
   const onSelect2=(theme)=>{
     setTheme(theme);
   }
 
   return (
-    <div className ="w-full h-full">
+    <div className ="w-full h-full col-span-7" >
       <div className="flex ml-5">
-        <LanguageSelector language={language} onSelect={onSelect} />
+        <LanguageSelector language={language} handleLanguageChange={handleLanguageChange} />
         <ThemeSelector theme={theme} onSelect={onSelect2}/>
       </div>
       <div className ="h-full w-full">
@@ -66,14 +51,11 @@ const CodeEditor = () => {
           }}
           ref={editorRef}
           theme={theme}
-          language={language}
-          defaultValue={CODE_SNIPPETS[language]}
+          language={language.split(" (")[0].toLowerCase()}
+          defaultValue={CODE_SNIPPETS[language.split(" (")[0].toLowerCase()]}
           onMount={onMount}
-          value={value}
-          onChange={(value) => {
-            setValue(value)
-            //alert(value)
-        }}
+          value={code}
+          onChange={(value)=>handleCodeChange(value)}
           
         />
       </div>
