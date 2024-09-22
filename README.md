@@ -1,8 +1,38 @@
-# React + Vite
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+# CodeCam
 
-Currently, two official plugins are available:
+A web based code editor featuring collaborative coding and video conferencing for better communication .
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+
+
+## Authors
+
+- [@lastnode](https://github.com/Jishan2610)
+
+
+## Features
+
+- Light/dark mode toggle
+- Code execution
+- Multi Language Support 
+- Video conference
+- Collaborative coding
+- Sign Up + Sign In 
+
+
+
+
+## Tech
+- Vite + React
+- Node 
+- Express
+- Socket
+- Mongo db + Mongoose
+- Tailwind Css
+- JWT
+- Zod
+- Postman (Testing)
+## APIs + Libraries (Used)
+- Monaco
+- Piston
+- Socket.IO
