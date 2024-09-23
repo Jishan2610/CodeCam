@@ -21,12 +21,12 @@ const CodeEditor = ({language,code,handleCodeChange,handleLanguageChange}) => {
   }
 
   return (
-    <div className ="w-full h-full col-span-7" >
+    <div className ="w-full h-full col-span-7 ml-2" >
       <div className="flex ml-5">
         <LanguageSelector language={language} handleLanguageChange={handleLanguageChange} />
         <ThemeSelector theme={theme} onSelect={onSelect2}/>
       </div>
-      <div className ="h-full w-full">
+      <div className ="h-screen w-full">
         <Editor
           options={{
                 autoIndent: 'full',

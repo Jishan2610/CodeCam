@@ -18,7 +18,7 @@ function App() {
   };
 
   return (
-    <div className="grid grid-cols-12 h-screen bg-gray-100 w-screen">
+    <div className="grid grid-cols-12 bg-gray-100 max-w-[97vw] h-97vh">
         <CodeEditor
           language={language}
           code={code}

@@ -2,9 +2,11 @@ import React,{ useState, useEffect } from "react";
 import { LanguageOptions } from "../Constants/LanguageOptions";
 import {OutputWindow} from "./OutputWindow"
 import axios from "axios";
+import {CustomInput} from "./CustomInput";
 const OutputPanel = ({language,code}) => {
-    const [processing, setProcessing] = useState(null);
+    const [processing, setProcessing] = useState("");
     const [outputDetails,setOutputDetails]=useState("Output")
+    const [customInput,setCustomInput]=useState(null);
     const checkStatus = async (token) => {
         const options = {
           method: "GET",
@@ -39,6 +41,9 @@ const OutputPanel = ({language,code}) => {
           //showErrorToast();
         }
       };
+      function handleCustomInput(input){
+         setCustomInput(input);
+      }
     function handleExecution(){
         setProcessing(true);
         const currLanguage=LanguageOptions.filter((lang)=>{
@@ -50,7 +55,7 @@ const OutputPanel = ({language,code}) => {
             language_id: currLanguage[0].id,
             // encode source code in base64
             source_code: btoa(code),
-            //stdin: btoa(customInput),
+            stdin: btoa(customInput),
         };
         const options = {
             method: "POST",
@@ -80,11 +85,14 @@ const OutputPanel = ({language,code}) => {
 
   return (
     <>
-    <div className="h-full w-full col-span-5 bg-white">
-      <button onClick={handleExecution}className="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded">
+    <div className="h-full w-full col-span-5 bg-white mx-4 my-1.5">
+      <OutputWindow outputDetails={outputDetails}/>
+      <CustomInput customInput={customInput} handleCustomInput={handleCustomInput}/>
+      <div className="w-full flex justify-center">
+      <button onClick={handleExecution}className="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded mt-2">
       {processing ? "Processing..." : "Compile and Execute"}
       </button>
-      <OutputWindow outputDetails={outputDetails}/>
+      </div>
       </div>
     </>
   );
