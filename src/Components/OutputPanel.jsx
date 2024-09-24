@@ -2,7 +2,7 @@ import React,{ useState, useEffect } from "react";
 import { LanguageOptions } from "../Constants/LanguageOptions";
 import {OutputWindow} from "./OutputWindow"
 import axios from "axios";
-import {CustomInput} from "./CustomInput";
+import CustomInput from "./CustomInput";
 const OutputPanel = ({language,code}) => {
     const [processing, setProcessing] = useState("");
     const [outputDetails,setOutputDetails]=useState("Output")

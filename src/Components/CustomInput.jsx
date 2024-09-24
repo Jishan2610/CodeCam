@@ -2,7 +2,7 @@ import React from "react";
 
 
 
-export const CustomInput=({customInput,handleCustomInput})=>{
+export default function CustomInput({customInput,handleCustomInput}){
     return <>
     
 <label for="input" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Custom input</label>
