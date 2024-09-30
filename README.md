@@ -34,5 +34,5 @@ A web based code editor featuring collaborative coding and video conferencing fo
 - Postman (Testing)
 ## APIs + Libraries (Used)
 - Monaco
-- Piston
+- Judge0 CE
 - Socket.IO
