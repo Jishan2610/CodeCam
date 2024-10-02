@@ -1,6 +1,7 @@
 import React from 'react';
 import BoxWithCircles from '../Components/BoxWithCircles';
 import Logo from '../Components/Logo';
+import { CreateRoomButton,JoinRoomFieldWithButton } from '../Components/CreateRoom';
 
 const Dashboard = () => {
   return (
@@ -55,20 +56,10 @@ const Dashboard = () => {
         </div>
 
         {/* Create Room Button and Join Room Field */}
-        <div className="flex justify-center mb-10 space-x-4 relative top-24">
-          <button className="px-6 py-3 bg-blue-500 text-white rounded-lg hover:bg-blue-600">
-            Create a Room
-          </button>
-          <div className="flex">
-            <input
-              type="text"
-              placeholder="Enter Room Id"
-              className="border border-gray-300 p-2 rounded-l-lg focus:ring focus:ring-blue-500"
-            />
-            <button className="px-4 bg-green-500 text-white rounded-r-lg hover:bg-green-600">
-              Join Room
-            </button>
-          </div>
+        <div className="flex justify-center mb-10 space-x-4 relative top-19">
+          <CreateRoomButton/>
+          <JoinRoomFieldWithButton/>
+          
         </div>
 
         {/* Cards with Language Names */}
