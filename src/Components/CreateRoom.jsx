@@ -1,4 +1,5 @@
-import React,{useState} from "react" ;
+import React,{useState,useEffect,useRef} from "react" ;
+import socketIo from "socket.io-client"
 import { useNavigate } from "react-router-dom";
 
 import axios from "axios";
@@ -6,6 +7,16 @@ import axios from "axios";
 function CreateRoomButton() {
     const [roomName,setRoomName]=useState("");
     const navigate = useNavigate();
+    const socketRef = useRef();
+    useEffect(() => {
+        socketRef.current = socketIo(import.meta.env.VITE_SERVER_URL);
+       
+
+        // Cleanup on unmount to avoid reconnections
+        // return () => {
+        //     socketRef.current.disconnect();
+        // };
+    }, []);
 
     const roomNameHandler=(e)=>{
         setRoomName(e.target.value);
@@ -29,7 +40,13 @@ function CreateRoomButton() {
             data: formData,
         })
         console.log(response);
+        const roomId=response.data.roomId;
         if(response.status>=200 && response.status<300){
+            console.log(roomId)
+            socketRef.current.emit("join room", {roomId});
+            socketRef.current.on("room joined",(roomId)=>{
+                console.log(`room joined ${roomId}`)
+            })
             navigate("/playground");
         }
         else {
