@@ -2,9 +2,15 @@ import React, { useState, useEffect } from "react";
 import CodeEditor from "../Components/CodeEditor";
 import OutputPanel from "../Components/OutputPanel";
 import { CODE_SNIPPETS } from "../Constants/CodeSnippet";
+import { usePlayground } from "../CustomHooks/usePlayground";
 function Playground() {
-  const [language, setLanguage] = useState("JavaScript (Node.js 12.14.0)");
-  const [code, setCode] = useState(CODE_SNIPPETS["javascript"]);
+  // const [language, setLanguage] = useState("JavaScript (Node.js 12.14.0)");
+  // const [code, setCode] = useState(CODE_SNIPPETS["javascript"]);
+  //Custom Hook usePlayground();
+  const {language,
+    setLanguage,
+    code,
+    setCode} = usePlayground();
   const handleCodeChange = (newCode) => {
     setCode(newCode);
   };

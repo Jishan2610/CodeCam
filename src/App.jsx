@@ -3,9 +3,11 @@ import  Signup  from "./Pages/Signup";
 import  Signin  from "./Pages/Signin";
 import Playground from "./Pages/Playground";
 import Dashboard from "./Pages/Dashboard";
+import { SocketProvider } from "./CustomHooks/contextProvider";
 function App() {
   return (
     <>
+    <SocketProvider>
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Signup />} />
@@ -15,6 +17,7 @@ function App() {
           <Route path="/dashboard" element={<Dashboard/>}/>
         </Routes>
       </BrowserRouter>
+      </SocketProvider>
     </>
   );
 }

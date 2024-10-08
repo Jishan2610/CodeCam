@@ -2,8 +2,13 @@ import React from 'react';
 import BoxWithCircles from '../Components/BoxWithCircles';
 import Logo from '../Components/Logo';
 import { CreateRoomButton,JoinRoomFieldWithButton } from '../Components/CreateRoom';
+import { usePlayground } from "../CustomHooks/usePlayground";
 
 const Dashboard = () => {
+  const {language,
+    setLanguage,
+    code,
+    setCode} = usePlayground();
   return (
     <div className="flex h-screen">
       {/* Left Sidebar */}
@@ -58,7 +63,7 @@ const Dashboard = () => {
         {/* Create Room Button and Join Room Field */}
         <div className="flex justify-center mb-10 space-x-4 relative top-19">
           <CreateRoomButton/>
-          <JoinRoomFieldWithButton/>
+          <JoinRoomFieldWithButton setLanguage={setLanguage} setCode={setCode}/>
           
         </div>
 

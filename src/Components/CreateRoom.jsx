@@ -1,23 +1,13 @@
-import React,{useState,useEffect,useRef} from "react" ;
-import socketIo from "socket.io-client"
+import React,{useState} from "react" ;
 import { useNavigate } from "react-router-dom";
-
+import  useSocket  from "../CustomHooks/contextProvider";
 import axios from "axios";
 
 function CreateRoomButton() {
     const [roomName,setRoomName]=useState("");
     const navigate = useNavigate();
-    const socketRef = useRef();
-    useEffect(() => {
-        socketRef.current = socketIo(import.meta.env.VITE_SERVER_URL);
-       
-
-        // Cleanup on unmount to avoid reconnections
-        // return () => {
-        //     socketRef.current.disconnect();
-        // };
-    }, []);
-
+    const socket=useSocket();
+    
     const roomNameHandler=(e)=>{
         setRoomName(e.target.value);
     }
@@ -43,8 +33,8 @@ function CreateRoomButton() {
         const roomId=response.data.roomId;
         if(response.status>=200 && response.status<300){
             console.log(roomId)
-            socketRef.current.emit("join room", {roomId});
-            socketRef.current.on("room joined",(roomId)=>{
+            socket.emit("join room", {roomId});
+            socket.once("room joined",(roomId)=>{
                 console.log(`room joined ${roomId}`)
             })
             navigate("/playground");
@@ -73,16 +63,30 @@ function CreateRoomButton() {
   );
 }
 
-function JoinRoomFieldWithButton() {
+function JoinRoomFieldWithButton({setCode,setLanguage}) {
+  const [roomId,setRoomId]=useState("");
+    const navigate = useNavigate();
+    const socket=useSocket();
+  const roomJoinerHandler=()=>{
+    socket.emit("join existing room", {roomId});
+    socket.on("existing room joined",(room)=>{
+        console.log(`room joined ${roomId}`)
+        console.log(room);
+    })
+    navigate("/playground");
+  }
+  const roomNameHandler=(e)=>{
+    setRoomId(e.target.value);
+}
   return (
     <>
       <div className="flex">
-        <input
+        <input onChange={roomNameHandler}
           type="text"
           placeholder="Enter Room Id"
           className="border border-gray-300 p-2 rounded-l-lg focus:ring focus:ring-blue-500"
         />
-        <button className="px-4 bg-green-500 text-white rounded-r-lg hover:bg-green-600">
+        <button className="px-4 bg-green-500 text-white rounded-r-lg hover:bg-green-600" onClick={roomJoinerHandler}>
           Join Room
         </button>
       </div>
