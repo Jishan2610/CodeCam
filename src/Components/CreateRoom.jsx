@@ -37,7 +37,7 @@ function CreateRoomButton() {
             socket.once("room joined",(roomId)=>{
                 console.log(`room joined ${roomId}`)
             })
-            navigate("/playground");
+            navigate("/playground",{ state: { roomId } });
         }
         else {
             //will throw some error
@@ -45,6 +45,7 @@ function CreateRoomButton() {
     }catch(e){
         console.log(e);
     }
+
     }
   return (
     <>
@@ -73,7 +74,7 @@ function JoinRoomFieldWithButton({setCode,setLanguage}) {
         console.log(`room joined ${roomId}`)
         console.log(room);
     })
-    navigate("/playground");
+    navigate("/playground",{ state: { roomId } });
   }
   const roomNameHandler=(e)=>{
     setRoomId(e.target.value);
