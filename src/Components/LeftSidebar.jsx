@@ -1,4 +1,6 @@
 import React from "react";
+import RoomSidebar from "./RoomSideBar";
+import Logo from "./Logo";
 
 
 const LeftSidebar=()=>{
@@ -20,17 +22,7 @@ const LeftSidebar=()=>{
             className="w-full p-2 rounded bg-gray-700 text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
         </div>
-
-        {/* Rooms Sections */}
-        <div className="mt-4">
-          <h2 className="text-lg font-semibold">All rooms created by user</h2>
-          {/* List created rooms here */}
-        </div>
-
-        <div className="mt-4">
-          <h2 className="text-lg font-semibold">All rooms joined by user</h2>
-          {/* List joined rooms here */}
-        </div>
+        <RoomSidebar/>
       </aside>
     </>
 }
