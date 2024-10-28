@@ -52,6 +52,7 @@ export default function Signin () {
                   }
                 );
                 localStorage.setItem("token", response.data.token);
+                localStorage.setItem("userId", response.data.userId);
                 navigate("/dashboard");
               }}
               label={"Sign in"}
