@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from "react-router-dom";
 import { MoreVertical, X, Search, Trash2, Users, ArrowRight, LogIn } from 'lucide-react';
 import axios from 'axios';
 
@@ -8,6 +9,7 @@ const RoomSidebar = () => {
   const [showOptions, setShowOptions] = useState(false);
   const [showUsersList, setShowUsersList] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
+  const navigate=useNavigate();
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -104,7 +106,7 @@ const RoomSidebar = () => {
           </div>
           <div className="p-2">
             <button
-              onClick={() => {/* TODO: Navigate to room */}}
+              onClick={() => {navigate("/playground",{ state: { roomId:selectedRoom._id } })}}
               className="w-full p-2 flex items-center gap-2 hover:bg-gray-700 rounded text-gray-200"
             >
               <LogIn className="w-5 h-5" />
